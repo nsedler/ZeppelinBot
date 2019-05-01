@@ -1,5 +1,6 @@
 import discord
 import os
+import json
 
 from discord.ext import commands
 
@@ -7,17 +8,26 @@ INITIAL_EXTENSIONS = {
 	'cogs.echo',
 	'cogs.info',
 	'cogs.owner',
-	'cogs.liveYTSubs'
+	'cogs.liveYTSubs',
+	'cogs.preferences'
 }
+
+
 
 
 def get_prefix(bot, message):
 
+	with open("prefixes.json") as f:
+		prefixes = json.load(f)
 
-	prefixes = ['$', '%', '.']
-	if not message.guild: return '?'
+	id = str(message.guild.id)
 
-	return commands.when_mentioned_or(*prefixes)(bot, message)
+	if id in prefixes:
+		return prefixes.get(id)
+	else:
+		return '$'
+
+
 
 
 class ZeppelinBot(commands.Bot):
@@ -38,8 +48,10 @@ class ZeppelinBot(commands.Bot):
 		print("Logged in as: ")
 		print("Username: " + self.user.name)
 		print("ID: " + str(self.user.id))
-		total_guilds = len(self.guilds)
-		await self.change_presence(activity=discord.Game("Currently helping " + str(total_guilds) + " guilds"))
+
+		total_users = len(set(self.get_all_members()))
+
+		await self.change_presence(activity=discord.Game("Currently helping " + str(total_users) + " users, man!"))
 
 	async def on_message(self, message):
 

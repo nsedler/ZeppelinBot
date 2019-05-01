@@ -13,7 +13,12 @@ class Info(commands.Cog):
 
 	@commands.command(name="about", desciption="Gives some basic information about Zeppelin Bot")
 	async def about(self, ctx):
-		pass
+
+		embed = discord.Embed(color=0xff0000)
+		embed.set_author(name="Zeppelin Bot", url="https://github.com/nsedler/ZeppelinBot", icon_url = "http://onebigphoto.com/uploads/2011/11/zeppelin-on-fire.jpg  ")
+		embed.add_field(name="Whats the point of ZeppelinBot?", value = "ZeppelinBot is a bot I 'm making to better learn python.", inline=False)
+		embed.add_field(name="Why the name Zeppelin?", value = "Because zeppelin rocks, man.", inline = False)
+		await ctx.send(embed=embed)
 
 
 def setup(bot):
