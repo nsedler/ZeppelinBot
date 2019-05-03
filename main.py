@@ -8,10 +8,10 @@ INITIAL_EXTENSIONS = {
 	'cogs.echo',
 	'cogs.info',
 	'cogs.owner',
-	'cogs.liveYTSubs',
-	'cogs.preferences'
+	'cogs.fun',
+	'cogs.preferences',
+	'cogs.test'
 }
-
 
 
 
