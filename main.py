@@ -5,7 +5,6 @@ import json
 from discord.ext import commands
 
 INITIAL_EXTENSIONS = {
-	'cogs.echo',
 	'cogs.info',
 	'cogs.owner',
 	'cogs.fun',
@@ -26,7 +25,6 @@ def get_prefix(bot, message):
 		return prefixes.get(id)
 	else:
 		return '$'
-
 
 
 
@@ -61,6 +59,10 @@ class ZeppelinBot(commands.Bot):
 
 	def run(self):
 		super().run(self.token)
+
+	@commands.Cog.listener()
+	async def on_command_error(self, ctx, error):
+		print(error)
 
 
 if __name__ == '__main__':

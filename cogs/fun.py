@@ -15,7 +15,7 @@ class Fun(commands.Cog):
 	class AppURLopener(urllib.request.FancyURLopener):
 		version = "Mozilla/5.0"
 
-	@commands.command()
+	@commands.command(pass_context=True)
 	async def subs(self, ctx):
 
 		"""
@@ -23,9 +23,11 @@ class Fun(commands.Cog):
 		"""
 
 		jsonn_pewds = urlopen(
-			"https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key={}".format(self.api_token))
+			"https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=pewdiepie&key={}".format(
+				self.api_token))
 		json_tseries = urlopen(
-			"https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key={}".format(self.api_token))
+			"https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=tseries&key={}".format(
+				self.api_token))
 
 		embed = discord.Embed(title="Pewdiepie vs T-Series", description="A live subcount of pewdiepie vs t-series", color=0xff0000)
 		embed.set_thumbnail(
@@ -36,32 +38,76 @@ class Fun(commands.Cog):
 			int(json.loads(json_tseries.read())['items'][0]['statistics']['subscriberCount'])), inline=True)
 		await ctx.send(embed=embed)
 
-	@commands.command()
+	@commands.command(pass_context=True)
 	async def echo(self, ctx, *, content: str):
 		"""
 		Repeats what you say
 		"""
 		await ctx.send(content)
 
-	@commands.command()
-	async def meow(self, ctx):
+	@commands.group(pass_context=True)
+	async def cat(self, ctx):
 		"""
 		Random cat pictures
 		"""
-		embed = discord.Embed(title="Random Cat", description="Meow!", color=0xff0000)
-		embed.set_image(url=json.loads(urlopen("http://aws.random.cat/meow").read())['file'])
+		if ctx.invoked_subcommand is None:
+			embed = discord.Embed(title="Random Cat", description="Meow!", color=0xff0000)
+			embed.set_image(url=json.loads(urlopen("http://aws.random.cat/meow").read())['file'])
+
+			await ctx.send(embed=embed)
+
+	@cat.command(pass_context=True, name="fact")
+	async def cat_fact(self, ctx):
+
+		"""
+		Random facts about cats
+		"""
+
+		req = Request("https://some-random-api.ml/facts/cat", headers={'User-Agent': 'Mozilla/5.0'})
+
+		embed = discord.Embed(title="__**Cat Fact**__", description=json.loads(urlopen(req).read())['fact'], color=0xff0000)
+		embed.set_author(name="ZeppelinBot", url="https://github.com/nsedler/ZeppelinBot", icon_url="https://3iz4pu1r2cxqxc3i63gnhpmh-wpengine.netdna-ssl.com/wp-content/uploads/burning-with-mast.jpg")
+
+		await ctx.send(embed=embed)
+
+	@commands.group(pass_context=True)
+	async def dog(self, ctx):
+		"""
+		Random dog pictures
+		"""
+		if ctx.invoked_subcommand is None:
+			embed = discord.Embed(title="Random dog", description="Woof!", color=0xff0000)
+			req = Request("https://some-random-api.ml/img/dog", headers={'User-Agent': 'Mozilla/5.0'})
+			embed.set_image(url=json.loads(urlopen(req).read())['link'])
+
+			await ctx.send(embed=embed)
+
+	@dog.command(pass_context=True, name="fact")
+	async def dog_fact(self, ctx):
+
+
+		"""
+		Random facts about dogs
+		"""
+
+		req = Request("https://some-random-api.ml/facts/dog", headers={'User-Agent': 'Mozilla/5.0'})
+
+		embed = discord.Embed(title="__**Dog Fact**__", description=json.loads(urlopen(req).read())['fact'], color=0xff0000)
+		embed.set_author(name="ZeppelinBot", url="https://github.com/nsedler/ZeppelinBot", icon_url="https://3iz4pu1r2cxqxc3i63gnhpmh-wpengine.netdna-ssl.com/wp-content/uploads/burning-with-mast.jpg")
 
 		await ctx.send(embed=embed)
 
 	@commands.command()
-	async def woof(self, ctx):
-		"""
-		Random dog pictures
-		"""
-		embed = discord.Embed(title="Random dog", description="Woof!", color=0xff0000)
-		req = Request("https://api-to.get-a.life/img/dog", headers={'User-Agent': 'Mozilla/5.0'})
-		embed.set_image(url=json.loads(urlopen(req).read())['link'])
+	async def token(self, ctx):
 
+		"""
+		Get ZeppelinBots token
+		"""
+
+		req = Request("https://some-random-api.ml/bottoken", headers={'User-Agent': 'Mozilla/5.0'})
+
+		embed = discord.Embed(title="__**Bot Token**__", description=json.loads(urlopen(req).read())['token'], color=0xff0000)
+		embed.set_author(name="ZeppelinBot", url="https://github.com/nsedler/ZeppelinBot", icon_url="https://3iz4pu1r2cxqxc3i63gnhpmh-wpengine.netdna-ssl.com/wp-content/uploads/burning-with-mast.jpg")
 		await ctx.send(embed=embed)
 
 

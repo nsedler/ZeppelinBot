@@ -7,12 +7,21 @@ class Test(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
-	@commands.command(hidden=True)
-	@commands.is_owner()
+	@commands.group()
+	async def group1(self, ctx):
+		await ctx.send("group1")
+
+	@group1.command()
 	async def test(self, ctx):
-		e = discord.Embed()
-		e.set_image(url="https://purr.objects-us-east-1.dream.io/i/20170122_215212.jpg")
-		await ctx.send(embed=e)
+		await ctx.send("group1 test1")
+
+	@commands.group()
+	async def group2(self, ctx):
+		await ctx.send("group2")
+
+	@group2.command()
+	async def test(self, ctx):
+		await ctx.send("group2 test2")
 
 
 
