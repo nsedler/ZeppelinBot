@@ -7,7 +7,7 @@ class Test(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
-	@commands.group()
+	@commands.group(hidden=True)
 	async def group1(self, ctx):
 		await ctx.send("group1")
 
@@ -15,7 +15,7 @@ class Test(commands.Cog):
 	async def test(self, ctx):
 		await ctx.send("group1 test1")
 
-	@commands.group()
+	@commands.group(hidden=True)
 	async def group2(self, ctx):
 		await ctx.send("group2")
 
