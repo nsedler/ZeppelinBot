@@ -135,6 +135,23 @@ class Fun(commands.Cog):
 
 		await ctx.send(embed=embed)
 
+	@commands.command()
+	async def insult(self, ctx, user: discord.Member):
+
+		"""
+		Insult @another_member
+		"""
+
+		req = Request("https://evilinsult.com/generate_insult.php?lang=en&type=json", headers={'User-Agent': 'Mozilla/5.0'})
+		
+		try:
+			if user.id == 185063150557593600 or user.id == 569991046428098637:
+    				print("test")
+			await ctx.send(user.name + ", " + json.loads(urlopen(req).read())['insult'])
+
+		except Exception as e:
+			print("te")
+
 
 	@commands.command()
 	async def league(self, ctx, summoner):
