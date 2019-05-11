@@ -7,6 +7,11 @@ class Info(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
+	async def cog_after_invoke(self, ctx):
+		print("\n----------------------------")
+		print("{0.author} used {0.command}...".format(ctx))
+		print("----------------------------")
+
 	@commands.command(name="ping")
 	async def ping(self, ctx):
 		"""

@@ -12,6 +12,12 @@ class Fun(commands.Cog):
 		self.api_token = os.getenv("YTAPI")
 
 
+	async def cog_after_invoke(self, ctx):
+		print("\n----------------------------")
+		print("{0.author} used {0.command}...".format(ctx))
+		print("----------------------------")
+
+
 	@commands.command(pass_context=True)
 	async def subs(self, ctx):
 
@@ -143,14 +149,12 @@ class Fun(commands.Cog):
 		"""
 
 		req = Request("https://evilinsult.com/generate_insult.php?lang=en&type=json", headers={'User-Agent': 'Mozilla/5.0'})
-		
-		try:
-			if user.id == 185063150557593600 or user.id == 569991046428098637:
-    				print("test")
-			await ctx.send(user.name + ", " + json.loads(urlopen(req).read())['insult'])
 
-		except Exception as e:
-			print("te")
+		if user.id == 185063150557593600 or user.id == 569991046428098637:
+    			await ctx.send(ctx.author.name + ", " + json.loads(urlopen(req).read())['insult'])
+		else:
+    			await ctx.send(user.name + ", " + json.loads(urlopen(req).read())['insult'])
+
 
 
 	@commands.command()
