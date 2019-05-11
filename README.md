@@ -1,4 +1,4 @@
-#Z eppelinBot
+# ZeppelinBot
 
 ZeppelinBot is a fun to use discord bot currently in development.
 
