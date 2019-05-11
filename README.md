@@ -13,9 +13,9 @@ ZeppelinBot is a fun to use discord bot currently in development.
 *Fun commands to use*
 - subs : Shows a live subcount of PewDiePie vs T-Series
 - echo (content) : Repeats the arguement *content*
-- cat : Shows a random picture of a cat
+- cat : Shows a random picture of a cat  
  cat fact : Shows a random cat fact
-- dog : Shows a random picture of a dog
+- dog : Shows a random picture of a dog  
  dog  fact : Shows a random dog fact
 - token : Return a false discord bot token
 - bored : Shows a random activity to do when you're bored
@@ -28,8 +28,8 @@ ZeppelinBot is a fun to use discord bot currently in development.
 
 #### refrences
 *Per guild settings*
-- prefix : Returns your guilds prefix
- prefix set (prefix) : Sets your guilds prefix to (prefix)
+- prefix : Returns your guilds prefix  
+ prefix set (prefix) : Sets your guilds prefix to (prefix)  
  prefix remove : Resets your guilds prefix back to default
 
 ------------
