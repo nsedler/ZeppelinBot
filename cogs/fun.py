@@ -1,7 +1,7 @@
 import discord
 import json
 import os
-import asyncio
+import random
 
 from discord.ext import commands
 from urllib.request import urlopen, Request
@@ -161,6 +161,10 @@ class Fun(commands.Cog):
 	@commands.command()
 	async def whois(self, ctx, *, member : discord.Member=None):
 
+		"""
+		Get info about @another_member (leave args blank for info about you)
+		"""
+
 		user = member or ctx.author
 
 		member_number = sorted(ctx.guild.members, key=lambda m: m.joined_at).index(user) + 1
@@ -177,7 +181,45 @@ class Fun(commands.Cog):
 
 
 		await ctx.send(embed=embed)
-		
+
+
+	@commands.command(name="8ball", aliases=['8b'])
+	async def ball8(self, ctx, question):
+
+		"""
+		Ask the magic 8ball a question and you shall recieve your answer
+		"""
+
+		answers = [
+
+			#affirmative 
+			"It is certain.",
+			"It is decidedly so.",
+			"Without a doubt.",
+			"Yes - definitly.",
+			"You may relay on it",
+			"As I see it, yes.",
+			"Most likley.",
+			"Outlook good.",
+			"Yes.",
+			"Signs point to yes.",
+
+			#non-committal 
+			"Reply hazy, try again.",
+			"Ask again later.",
+			"Better not tell you now.",
+			"Cannot predict now.",
+			"Concentrate and ask again.",
+
+			#negative
+			"Don't count on it.",
+			"My reply is no.",
+			"My sources say no.",
+			"Outlook not so good.",
+			"Very doubtfull."
+		]
+		await ctx.send(random.choice(answers))
+
 
 def setup(bot):
 	bot.add_cog(Fun(bot))

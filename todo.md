@@ -3,8 +3,7 @@
 ---
 
 *IN PROGRESS*
-- Add whois command
-  - Show birthdate (signup date), roles, name (or nickname), 
+
 
 *NOT STARTED YET*
 - Log channel command
@@ -17,5 +16,9 @@
 - Add music commands
   - play yt links, yt query, spotify (no soundcloud, gross),  
     remove from queue, view queue, have options to choose from, etc
+
+*FINISHED*
+- Add whois command
+  - Show birthdate (signup date), roles, name (or nickname)
 - 8ball command
   - User asks a question and bot returns one of the classic 8ball answers
