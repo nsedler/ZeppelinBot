@@ -3,9 +3,8 @@
 ---
 
 *IN PROGRESS*
-- League of legends command
-  - Search by summoner name, returns rank, lvl etc
-  - Weekly champion rotations
+- Add whois command
+  - Show birthdate (signup date), roles, name (or nickname), 
 
 *NOT STARTED YET*
 - Log channel command
@@ -15,8 +14,8 @@
   - Actually learn how to interact with sql or mongodb with python3
 - Add guild info command
   - Shows icon, members, owner, etc
-- Add whois command
-  - Show birthdate (signup date), roles, name (or nickname), 
 - Add music commands
   - play yt links, yt query, spotify (no soundcloud, gross),  
     remove from queue, view queue, have options to choose from, etc
+- 8ball command
+  - User asks a question and bot returns one of the classic 8ball answers

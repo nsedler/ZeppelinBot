@@ -1,6 +1,7 @@
 import discord
 import json
 import os
+import asyncio
 
 from discord.ext import commands
 from urllib.request import urlopen, Request
@@ -18,7 +19,7 @@ class Fun(commands.Cog):
 		print("----------------------------")
 
 
-	@commands.command(pass_context=True)
+	@commands.command()
 	async def subs(self, ctx):
 
 		"""
@@ -43,7 +44,7 @@ class Fun(commands.Cog):
 		await ctx.send(embed=embed)
 
 
-	@commands.command(pass_context=True)
+	@commands.command()
 	async def echo(self, ctx, *, content: str):
 		
 		"""
@@ -53,7 +54,7 @@ class Fun(commands.Cog):
 		await ctx.send(content)
 
 
-	@commands.group(pass_context=True)
+	@commands.group()
 	async def cat(self, ctx):
 
 		"""
@@ -67,7 +68,7 @@ class Fun(commands.Cog):
 			await ctx.send(embed=embed)
 
 
-	@cat.command(pass_context=True, name="fact")
+	@cat.command(name="fact")
 	async def cat_fact(self, ctx):
 
 		"""
@@ -82,7 +83,7 @@ class Fun(commands.Cog):
 		await ctx.send(embed=embed)
 
 
-	@commands.group(pass_context=True)
+	@commands.group()
 	async def dog(self, ctx):
 
 		"""
@@ -97,7 +98,7 @@ class Fun(commands.Cog):
 			await ctx.send(embed=embed)
 
 
-	@dog.command(pass_context=True, name="fact")
+	@dog.command(name="fact")
 	async def dog_fact(self, ctx):
 
 		"""
@@ -141,6 +142,7 @@ class Fun(commands.Cog):
 
 		await ctx.send(embed=embed)
 
+
 	@commands.command()
 	async def insult(self, ctx, user: discord.Member):
 
@@ -155,12 +157,27 @@ class Fun(commands.Cog):
 		else:
     			await ctx.send(user.name + ", " + json.loads(urlopen(req).read())['insult'])
 
-
-
+	
 	@commands.command()
-	async def league(self, ctx, summoner):
-		#https://developer.riotgames.com/api-methods/#summoner-v4/GET_getBySummonerName
-		pass
+	async def whois(self, ctx, *, member : discord.Member=None):
+
+		user = member or ctx.author
+
+		member_number = sorted(ctx.guild.members, key=lambda m: m.joined_at).index(user) + 1
+		rolenames = ', '.join([r.name for r in user.roles if r.name != "@everyone"]) or 'None'
+
+		embed = discord.Embed(description="{0.mention}".format(user), color=user.color)
+		embed.set_author(name=user, icon_url=user.avatar_url)
+
+		embed.add_field(name="Status", value="{0.status}".format(user), inline=True)
+		embed.add_field(name="Joined", value=user.joined_at.strftime('%a, %b %d, %Y %I:%M %p'), inline=True)
+		embed.add_field(name="Roles[{}]".format(len(user.roles) -1), value=rolenames, inline=False)
+		embed.add_field(name="Join Position", value=member_number, inline=True)
+		embed.add_field(name="Registered", value=user.created_at.strftime('%a, %b %d, %Y %I:%M %p'), inline=True)
+
+
+		await ctx.send(embed=embed)
+		
 
 def setup(bot):
 	bot.add_cog(Fun(bot))

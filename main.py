@@ -62,7 +62,7 @@ class ZeppelinBot(commands.Bot):
 
 	@commands.Cog.listener()
 	async def on_command_error(self, ctx, error):
-		print("{0.author.name} caused ".format(ctx) + error)
+		await ctx.send("{} caused {}".format(ctx.author.name, error))
 
 
 if __name__ == '__main__':
