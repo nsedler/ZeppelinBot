@@ -2,6 +2,7 @@ import discord
 import json
 import os
 import random
+import requests
 
 from discord.ext import commands
 from urllib.request import urlopen, Request
@@ -191,7 +192,6 @@ class Fun(commands.Cog):
 		"""
 
 		answers = [
-
 			#affirmative 
 			"It is certain.",
 			"It is decidedly so.",
@@ -216,9 +216,41 @@ class Fun(commands.Cog):
 			"My reply is no.",
 			"My sources say no.",
 			"Outlook not so good.",
-			"Very doubtfull."
-		]
+			"Very doubtfull."]
+
 		await ctx.send(random.choice(answers))
+
+	
+	@commands.command()
+	async def clash(self, ctx, tag):
+
+		"""
+		Search information about your Clash Royale account
+		"""
+
+		if tag[0] != '%':
+    			tag1 = '%' + tag
+
+		req = requests.get("https://api.clashroyale.com/v1/players/{}".format(tag), headers={"Accept":"application/json", "authorization":"Bearer " + os.getenv("CRTOKEN")})
+		cr_data = req.json()
+
+		print(json.dumps(req.json(), indent = 2))
+
+		embed = discord.Embed(title="Profile!")
+
+
+		embed.title = cr_data['name']
+		embed.set_thumbnail(url="https://static-s.aa-cdn.net/img/ios/1053012308/a44c20f713a870b74110662371b9fc4d")
+		embed.description = tag.replace('%', '#')
+		embed.url = f"http://cr-api.com/profile/{tag}"
+		embed.add_field(name="Current Trophies", value=cr_data['trophies'])
+		embed.add_field(name="Highest Trophies", value=cr_data['bestTrophies'])
+		embed.add_field(name="Level", value=cr_data['expLevel'])
+		embed.add_field(name="Wins/Losses", value=f"{cr_data['wins']}/{cr_data['losses']}")
+
+
+		await ctx.send(embed=embed)
+
 
 
 def setup(bot):

@@ -3,7 +3,8 @@
 ---
 
 *IN PROGRESS*
-
+- Clash Royale command
+  - User gives tag and bot return trophies (current/highest), lvl, etc
 
 *NOT STARTED YET*
 - Log channel command
