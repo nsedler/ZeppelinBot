@@ -183,6 +183,25 @@ class Fun(commands.Cog):
 
 		await ctx.send(embed=embed)
 
+	
+	@commands.command()
+	async def guild(self, ctx):
+
+		"""
+		Get the information about your guild
+		"""
+
+		guild = ctx.guild
+
+		embed = discord.Embed(color=ctx.author.color)
+
+		embed.set_author(name=guild.name, icon_url=guild.icon_url)
+		embed.add_field(name="Owner", value=guild.owner.mention)
+		embed.add_field(name="Guild Size", value=len(guild.members))
+		embed.add_field(name="Guild Prefix", value=ctx.prefix)
+
+		await ctx.send(embed=embed)
+
 
 	@commands.command(name="8ball", aliases=['8b'])
 	async def ball8(self, ctx, question):

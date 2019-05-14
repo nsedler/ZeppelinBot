@@ -3,8 +3,8 @@
 ---
 
 *IN PROGRESS*
-- Clash Royale command
-  - User gives tag and bot return trophies (current/highest), lvl, etc
+- Add guild info command
+  - Shows icon, members, owner, etc
 
 *NOT STARTED YET*
 - Log channel command
@@ -12,8 +12,7 @@
   - Shows deleted msgs, edited msgs, changed nicknames, reactions etc
 - Change data saving from json to sql or mongodb
   - Actually learn how to interact with sql or mongodb with python3
-- Add guild info command
-  - Shows icon, members, owner, etc
+
 - Add music commands
   - play yt links, yt query, spotify (no soundcloud, gross),  
     remove from queue, view queue, have options to choose from, etc
@@ -23,3 +22,5 @@
   - Show birthdate (signup date), roles, name (or nickname)
 - 8ball command
   - User asks a question and bot returns one of the classic 8ball answers
+- Clash Royale command
+  - User gives tag and bot return trophies (current/highest), lvl, etc
