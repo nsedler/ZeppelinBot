@@ -199,6 +199,10 @@ class Fun(commands.Cog):
 		embed.add_field(name="Owner", value=guild.owner.mention)
 		embed.add_field(name="Guild Size", value=len(guild.members))
 		embed.add_field(name="Guild Prefix", value=ctx.prefix)
+		embed.add_field(name="Total Channels", value=len(guild.channels))
+		embed.add_field(name="Text Channels", value=len(guild.text_channels))
+		embed.add_field(name="Voice Channels", value=len(guild.voice_channels))
+		
 
 		await ctx.send(embed=embed)
 
