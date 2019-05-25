@@ -25,8 +25,7 @@ def get_prefix(bot, message):
 		return prefixes.get(id)
 	else:
 		return '$'
-
-
+		
 
 class ZeppelinBot(commands.Bot):
 
@@ -53,8 +52,6 @@ class ZeppelinBot(commands.Bot):
 
 	async def on_message(self, message):
 
-		if message.author.bot:
-			return
 		await self.process_commands(message)
 
 	def run(self):
