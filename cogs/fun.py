@@ -158,54 +158,6 @@ class Fun(commands.Cog):
 		else:
     			await ctx.send(user.name + ", " + json.loads(urlopen(req).read())['insult'])
 
-	
-	@commands.command()
-	async def whois(self, ctx, *, member : discord.Member=None):
-
-		"""
-		Get info about @another_member (leave args blank for info about you)
-		"""
-
-		user = member or ctx.author
-
-		member_number = sorted(ctx.guild.members, key=lambda m: m.joined_at).index(user) + 1
-		rolenames = ', '.join([r.name for r in user.roles if r.name != "@everyone"]) or 'None'
-
-		embed = discord.Embed(description="{0.mention}".format(user), color=user.color)
-		embed.set_author(name=user, icon_url=user.avatar_url)
-
-		embed.add_field(name="Status", value="{0.status}".format(user), inline=True)
-		embed.add_field(name="Joined", value=user.joined_at.strftime('%a, %b %d, %Y %I:%M %p'), inline=True)
-		embed.add_field(name="Roles[{}]".format(len(user.roles) -1), value=rolenames, inline=False)
-		embed.add_field(name="Join Position", value=member_number, inline=True)
-		embed.add_field(name="Registered", value=user.created_at.strftime('%a, %b %d, %Y %I:%M %p'), inline=True)
-
-
-		await ctx.send(embed=embed)
-
-	
-	@commands.command()
-	async def guild(self, ctx):
-
-		"""
-		Get the information about your guild
-		"""
-
-		guild = ctx.guild
-
-		embed = discord.Embed(color=ctx.author.color)
-
-		embed.set_author(name=guild.name, icon_url=guild.icon_url)
-		embed.add_field(name="Owner", value=guild.owner.mention)
-		embed.add_field(name="Guild Size", value=len(guild.members))
-		embed.add_field(name="Guild Prefix", value=ctx.prefix)
-		embed.add_field(name="Total Channels", value=len(guild.channels))
-		embed.add_field(name="Text Channels", value=len(guild.text_channels))
-		embed.add_field(name="Voice Channels", value=len(guild.voice_channels))
-		
-
-		await ctx.send(embed=embed)
-
 
 	@commands.command(name="8ball", aliases=['8b'])
 	async def ball8(self, ctx, question):
